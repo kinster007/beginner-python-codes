@@ -10,12 +10,17 @@ class Queue:
     
     def remove(self):
         if len(self.queue) > 0:
-            return self.queue.pop()
+            self.queue.pop()
+            return
         return ("queue is empty")
+        
+    def printq(self):
+        print(self.queue)
         
 TheQueue = Queue()
 TheQueue.add("Mon")
 TheQueue.add("Tue")
 TheQueue.add("Wed")
-print(TheQueue.remove())
-print(TheQueue.remove())
+TheQueue.printq()
+TheQueue.remove()
+TheQueue.printq()
