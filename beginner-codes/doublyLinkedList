@@ -1,0 +1,77 @@
+class Node:
+    def __init__(self, dataval):
+        self.dataval = dataval
+        self.nextval = None
+        self.prevval = None
+        
+class DlinkedList:
+    def __init__(self):
+        self.headval = None
+    
+    def push(self, newdata):
+        n = Node(newdata)
+        n.nextval = self.headval
+        if self.headval is not None:
+            self.headval.prevval = n
+        self.headval = n
+        
+    def insert(self, prevnode, newval):
+        if prevnode is None:
+            return("No node like that")
+        m = Node(newval)
+        m.nextval = prevnode.nextval
+        prevnode.nextval = m
+        m.prevval = prevnode
+        if m.nextval is not None:
+            m.nextval.prevval = m
+    
+    def append(self, newval):
+        k = Node(newval)
+        k.nextval = None
+        if self.headval is None:
+            k.prevval = None
+            self.headval = k 
+            return
+        last = self.headval
+        while last.nextval is not None:
+            last = last.nextval
+        last.nextval = k 
+        k.prevval = last
+        return
+    def lprint(self, node):
+        while (node is not None):
+            print(node.dataval)
+            last = node
+            node = node.nextval
+            
+    def delete(self, key):
+        temp = self.headval
+        if temp.dataval == key:
+            self.headval = temp.nextval
+            temp = None
+            return
+        while temp.nextval is not None:
+            temp = temp.nextval
+            if temp.dataval == key:
+                temp.prevval.nextval = temp.nextval
+                temp.nextval.prevval = temp.prevval
+                temp = None
+                return
+
+dllist = DlinkedList()
+dllist.push(8)
+dllist.push(12)
+dllist.append(9)
+dllist.insert(dllist.headval.nextval, 13)
+dllist.delete(8)
+dllist.lprint(dllist.headval)
+
+
+
+
+
+
+
+
+
+
