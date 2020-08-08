@@ -53,9 +53,13 @@ class DlinkedList:
         while temp.nextval is not None:
             temp = temp.nextval
             if temp.dataval == key:
-                temp.prevval.nextval = temp.nextval
-                temp.nextval.prevval = temp.prevval
-                temp = None
+                if temp.nextval is None:
+                    temp.prevval.nextval = None
+                    temp = None
+                else:
+                    temp.prevval.nextval = temp.nextval
+                    temp.nextval.prevval = temp.prevval
+                    temp = None
                 return
 
 dllist = DlinkedList()
@@ -63,7 +67,7 @@ dllist.push(8)
 dllist.push(12)
 dllist.append(9)
 dllist.insert(dllist.headval.nextval, 13)
-dllist.delete(8)
+dllist.delete(9)
 dllist.lprint(dllist.headval)
 
 
